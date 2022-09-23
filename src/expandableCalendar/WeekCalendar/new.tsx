@@ -18,12 +18,13 @@ import {DateData} from '../../types';
 export interface WeekCalendarProps extends CalendarListProps {
   /** whether to have shadow/elevation for the calendar */
   allowShadow?: boolean;
+  disableOnPageChange?: boolean
 }
 
 const NUMBER_OF_PAGES = 50;
 
 const WeekCalendar = (props: WeekCalendarProps) => {
-  const {current, firstDay = 0, markedDates, allowShadow = true, hideDayNames, theme, calendarWidth, testID} = props;
+  const {current, firstDay = 0, markedDates, allowShadow = true, hideDayNames, theme, calendarWidth, testID, disableOnPageChange = false} = props;
   const context = useContext(CalendarContext);
   const {date, updateSource} = context;
   const style = useRef(styleConstructor(theme));
@@ -59,7 +60,8 @@ const WeekCalendar = (props: WeekCalendarProps) => {
 
   const onPageChange = useCallback(
     (pageIndex: number, _prevPage, {scrolledByUser}) => {
-      if (scrolledByUser) {
+//       if (scrolledByUser) {
+    if (scrolledByUser && !disableOnPageChange) {
         context?.setDate(items[pageIndex], UpdateSources.WEEK_SCROLL);
       }
     },
