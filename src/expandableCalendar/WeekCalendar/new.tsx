@@ -61,7 +61,7 @@ const WeekCalendar = (props: WeekCalendarProps) => {
   const onPageChange = useCallback(
     (pageIndex: number, _prevPage, {scrolledByUser}) => {
 //       if (scrolledByUser) {
-    if (scrolledByUser && !disableOnPageChange) {
+    if (scrolledByUser && disableOnPageChange) {
         context?.setDate(items[pageIndex], UpdateSources.WEEK_SCROLL);
       }
     },
