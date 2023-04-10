@@ -24,7 +24,7 @@ export interface WeekCalendarProps extends CalendarListProps {
 const NUMBER_OF_PAGES = 50;
 
 const WeekCalendar = (props: WeekCalendarProps) => {
-  const {current, firstDay = 0, markedDates, allowShadow = true, hideDayNames, theme, calendarWidth, testID, disableOnPageChange = false} = props;
+  const {current, firstDay = 0, markedDates, allowShadow = true, hideDayNames, theme, calendarWidth, calendarHeight, testID, disableOnPageChange = false} = props;
   const context = useContext(CalendarContext);
   const {date, updateSource} = context;
   const style = useRef(styleConstructor(theme));
@@ -121,7 +121,7 @@ const WeekCalendar = (props: WeekCalendarProps) => {
           extendedState={extraData}
           style={style.current.container}
           initialPageIndex={NUMBER_OF_PAGES}
-          pageHeight={48}
+          pageHeight={calendarHeight ?? 48}
           pageWidth={containerWidth}
           onPageChange={onPageChange}
           scrollViewProps={{
